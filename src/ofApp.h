@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-//#include "ofxGui.h"
+#include "ofxGui.h"
 class ofApp : public ofBaseApp{
 
 	public:
@@ -25,5 +25,5 @@ class ofApp : public ofBaseApp{
 		ofParameter<ofColor> baseColor;
     	ofParameter<ofColor> accentColor;
 		ofParameterGroup parameters;
-		//ofxPanel gui;
+		ofxPanel gui;
 };
