@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -20,10 +21,26 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		ofVec2f getRenderDimensions();
 		
+		void loadImageButtonPressed(){}
+    void sunResolutionChanged(int& circleResolution){}
+	void saveSnapshot(){}
 
-		ofParameter<ofColor> baseColor;
+    	ofParameter<ofColor> baseColor;
     	ofParameter<ofColor> accentColor;
+    	ofParameter<ofColor> sunColor;
+    	ofParameter<float> sunRadius;
+    	ofParameter<float> decay;
+    	ofParameter<float> exposure;
+    	ofParameter<float> density;
+    	ofParameter<float> weight;
+    	ofParameter<int> numSamples;
+    	ofParameter<int> sunResolution;
+    	ofParameter<bool> moveSun;
+    	ofxButton loadImageButton;
+    	ofxButton saveSnapshotButton;
+
 		ofParameterGroup parameters;
 		ofxPanel gui;
 };

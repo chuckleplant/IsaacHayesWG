@@ -1,0 +1,95 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceRoot}",
+                "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1",
+                "/usr/local/include",
+                "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include",
+                "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+                "/usr/include",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/utils",
+                    "/usr/local/include",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/events",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/app",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/3d",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/math",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/sound",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/communication",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/gl",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/graphics",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/video",
+                    "/usr/include",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/types",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src"
+            ],
+            "defines": [],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1",
+                    "/usr/local/include",
+                    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include",
+                    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+                    "/usr/include",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/utils",
+                    "/usr/local/include",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/events",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/app",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/3d",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/math",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/sound",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/communication",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/gl",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/graphics",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/video",
+                    "/usr/include",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/types",
+                    "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceRoot}",
+                "/usr/include",
+                "/usr/local/include"
+            ],
+            "defines": [],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceRoot}",
+                "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE"
+            ],
+            "intelliSenseMode": "msvc-x64",
+            "browse": {
+                "path": [
+                    "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ]
+}
