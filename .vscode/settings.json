@@ -17,6 +17,11 @@
         "string": "cpp",
         "unordered_map": "cpp",
         "utility": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "__functional_base": "cpp",
+        "istream": "cpp",
+        "locale": "cpp",
+        "thread": "cpp",
+        "tuple": "cpp"
     }
 }
