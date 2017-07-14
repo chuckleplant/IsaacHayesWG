@@ -21,11 +21,15 @@ class ShaftGui
 		ofxPanel gui;
 
     public:
+		void setup();
         void draw();
         void loadImageButtonPressed();
         void sunResolutionChanged(int& circleResolution);
 	    void saveSnapshot();
 
+		ofColor const & getBaseColor() const;
+		ofColor const & getAccentColor() const;
+		ofColor const & getSunColor() const;
         float const & getSunRadius() const;
         float const & getDecay() const;
         float const & getExposure() const;
@@ -36,4 +40,4 @@ class ShaftGui
         bool const & isSunMoving() const;
 
         
-}
+};

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxGui.h"
+#include "ShaftGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -27,20 +27,5 @@ class ofApp : public ofBaseApp{
     void sunResolutionChanged(int& circleResolution){}
 	void saveSnapshot(){}
 
-    	ofParameter<ofColor> baseColor;
-    	ofParameter<ofColor> accentColor;
-    	ofParameter<ofColor> sunColor;
-    	ofParameter<float> sunRadius;
-    	ofParameter<float> decay;
-    	ofParameter<float> exposure;
-    	ofParameter<float> density;
-    	ofParameter<float> weight;
-    	ofParameter<int> numSamples;
-    	ofParameter<int> sunResolution;
-    	ofParameter<bool> moveSun;
-    	ofxButton loadImageButton;
-    	ofxButton saveSnapshotButton;
-
-		ofParameterGroup parameters;
-		ofxPanel gui;
+    	ShaftGui shaftGui;
 };
