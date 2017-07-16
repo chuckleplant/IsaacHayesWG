@@ -23,9 +23,9 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		ofVec2f getRenderDimensions();
 		
-		void loadImageButtonPressed(){}
-    void sunResolutionChanged(int& circleResolution){}
-	void saveSnapshot(){}
+		void setupImageResourcesFromImage(string const & imageFilename);
 
     	ShaftGui shaftGui;
+		ofImage sceneImage;
+		
 };

@@ -1,9 +1,20 @@
 #include "ofApp.h"
+#include "ofxAppEmscriptenWindow.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-   
-    shaftGui.setup();
+    
+#ifdef TARGET_OSX
+ofLogNotice() << "osx";
+#endif
+#ifdef TARGET_WIN32
+ofLogNotice() << "win";
+#endif
+#if defined( TARGET_LINUX ) && defined (OF_USING_GTK)
+ofLogNotice() << "lin";
+#endif
+
+    shaftGui.setup(std::bind(&ofApp::setupImageResourcesFromImage, this, std::placeholders::_1));
 
     ////
     // Scene params
@@ -33,8 +44,22 @@ void ofApp::draw(){
     ofBackgroundGradient(shaftGui.getAccentColor(), shaftGui.getBaseColor());
     ofPopMatrix();
     shaftGui.draw();
-    ofDrawBitmapStringHighlight(ofToString(ofGetWindowWidth()), ofGetMouseX(), ofGetMouseY());
+    ofDrawBitmapStringHighlight(shaftGui.debugy, ofGetMouseX(), ofGetMouseY());
 }
+
+void ofApp::setupImageResourcesFromImage(string const & imageFilename)
+{
+    if(sceneImage.load(imageFilename))
+    {
+        ofLog() << "log?";
+    }
+    else
+    {
+        ofSystemAlertDialog("Could not load image file ("+ imageFilename +")");
+    }
+    
+}
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){

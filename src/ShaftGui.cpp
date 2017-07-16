@@ -1,7 +1,12 @@
 #include "ShaftGui.h"
+#include "ofxAppEmscriptenWindow.h"
+#define STRINGIFY(s) #s 
 
-void ShaftGui::setup()
+void ShaftGui::setup(std::function<void(string const &)> loadImage)
 {
+    debugy = "initial"; 
+    loadImageFunction = loadImage;
+
     decay.setMin(0.8);
     decay.setMax(1.0);
     exposure.setMin(0.0);
@@ -64,6 +69,44 @@ void ShaftGui::draw()
 
 void ShaftGui::loadImageButtonPressed()
 {
+
+/*         int test_int = emscripten_run_script_int(STRINGIFY(
+            function loadDialog()
+            {
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.click();
+                return input.data.length;
+                //var reader = new FileReader();
+                //var stringfile = reader.reasAsBinaryString(input.data);
+                //return stringfile.length;
+            }
+            loadDialog();
+        ));
+        ofLogNotice() << "int : " << test_int; */
+
+
+
+ 
+        char * somestring = emscripten_run_script_string(STRINGIFY(
+            function loadDialog()
+            {
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.click();
+                return "Whot";
+                //return input.value;
+
+               // var reader = new FileReader();
+                //reader.reasAsBinaryString(input.data);
+                
+            }
+            loadDialog();
+        )
+        );
+
+        ofLogNotice() << "File as string? : " << somestring; 
+
 }
 
 void ShaftGui::sunResolutionChanged(int& circleResolution)
