@@ -114,11 +114,7 @@
                                                                             document.getElementById('resize').checked)">
   </span>-->
   <span>
-    <form action="/" method="post" onsubmit="return imgUpload();">
-
-        <input type="file" id="fileLoader"/>
-        <input type="submit" value="Upload"/>
-    </form>
+        <input type="file" id="fileLoader"/>    
   </span>
 </span>
 
@@ -232,18 +228,17 @@
 
 </script>
 <script type="text/javascript">
+//Source: https://www.html5rocks.com/en/tutorials/file/dndfiles/
+function handleFileSelect(evt) {
+  console.log("Entered event");
 
-  var imgUpload = function() {
-    var photo = document.getElementById("fileLoader");
-    // the file is the first element in the files property
-    var file = photo.files[0];
-    //console.log("photo files number: " + photo.files.length());
+    var files = evt.target.files; // FileList object
+    var f = files[0];
+    console.log("File name: " + f.name);    
+    console.log("File size: " + f.size);
+  }
+  document.getElementById('fileLoader').addEventListener('change', handleFileSelect, false);
 
-    console.log("File name: " + file.fileName);
-    console.log("File size: " + file.fileSize);
-
-    return false;
-};
 
 </script>
   </body>
