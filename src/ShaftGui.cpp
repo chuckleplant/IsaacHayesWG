@@ -67,6 +67,15 @@ void ShaftGui::draw()
     gui.draw();
 }
 
+extern "C"{
+    void testJSCall(int x)
+    {
+        printf("Size %d", x);
+    }
+}
+
+
+
 void ShaftGui::loadImageButtonPressed()
 {
 

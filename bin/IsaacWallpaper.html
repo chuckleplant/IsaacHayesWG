@@ -234,8 +234,22 @@ function handleFileSelect(evt) {
 
     var files = evt.target.files; // FileList object
     var f = files[0];
+    if(!f.type.match('image.*'))
+    {
+      console.log("Not an image!");
+      return false;
+    }
+
     console.log("File name: " + f.name);    
     console.log("File size: " + f.size);
+
+    var reader = new FileReader();
+    reader.onload = function(event) {
+
+      var arrayBuffer = event.target.result;
+      console.log(event.target.result);
+    };
+    reader.readAsArrayBuffer(f);
   }
   document.getElementById('fileLoader').addEventListener('change', handleFileSelect, false);
 
