@@ -113,7 +113,13 @@
   <span><input type="button" value="Fullscreen" onclick="Module.requestFullScreen(document.getElementById('pointerLock').checked, 
                                                                             document.getElementById('resize').checked)">
   </span>-->
-  <span><input type="file" id="fileLoader"/></span>
+  <span>
+    <form action="/" method="post" onsubmit="return imgUpload();">
+
+        <input type="file" id="fileLoader"/>
+        <input type="submit" value="Upload"/>
+    </form>
+  </span>
 </span>
 
     <div class="emscripten">
@@ -223,6 +229,21 @@
           var script = document.createElement('script');
           script.src = "IsaacWallpaper.js";
           document.body.appendChild(script);
+
+</script>
+<script type="text/javascript">
+
+  var imgUpload = function() {
+    var photo = document.getElementById("fileLoader");
+    // the file is the first element in the files property
+    var file = photo.files[0];
+    //console.log("photo files number: " + photo.files.length());
+
+    console.log("File name: " + file.fileName);
+    console.log("File size: " + file.fileSize);
+
+    return false;
+};
 
 </script>
   </body>
