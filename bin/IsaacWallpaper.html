@@ -245,11 +245,11 @@ function handleFileSelect(evt) {
 
     var reader = new FileReader();
     reader.onload = function(event) {
-
-      var arrayBuffer = event.target.result;
-      console.log(event.target.result);
+      var base64string = reader.result;      
+      console.log(base64string);
     };
-    reader.readAsArrayBuffer(f);
+    reader.readAsDataURL(f);
+
   }
   document.getElementById('fileLoader').addEventListener('change', handleFileSelect, false);
 
