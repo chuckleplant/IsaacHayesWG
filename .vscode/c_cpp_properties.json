@@ -10,20 +10,20 @@
                 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
                 "/usr/include",
                 "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/utils",
-                    "/usr/local/include",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/events",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/app",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/3d",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/math",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/sound",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/communication",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/gl",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/graphics",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/video",
-                    "/usr/include",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/types",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src"
+                "/usr/local/include",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/events",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/app",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/3d",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/math",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/sound",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/communication",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/gl",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/graphics",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/video",
+                "/usr/include",
+                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/types",
+                "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -48,7 +48,8 @@
                     "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/video",
                     "/usr/include",
                     "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/types",
-                    "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src"
+                    "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src",
+                    "${workspaceRoot}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
@@ -66,7 +67,8 @@
             "browse": {
                 "path": [
                     "/usr/include",
-                    "/usr/local/include"
+                    "/usr/local/include",
+                    "${workspaceRoot}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
@@ -85,11 +87,13 @@
             "intelliSenseMode": "msvc-x64",
             "browse": {
                 "path": [
-                    "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*"
+                    "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*",
+                    "${workspaceRoot}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
             }
         }
-    ]
+    ],
+    "version": 2
 }
