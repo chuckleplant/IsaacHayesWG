@@ -76,9 +76,17 @@ extern "C"{
 
 
 
+extern "C" 
+{
+    int receive_base_64(int ptr)
+    {
+        printf("pointer at %d", ptr);
+    }    
+}
+
+
 void ShaftGui::loadImageButtonPressed()
 {
-
 /*         int test_int = emscripten_run_script_int(STRINGIFY(
             function loadDialog()
             {
