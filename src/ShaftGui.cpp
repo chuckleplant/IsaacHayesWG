@@ -1,9 +1,25 @@
 #include "ShaftGui.h"
 #include "ofxAppEmscriptenWindow.h"
+#include <emscripten/val.h>
 #define STRINGIFY(s) #s 
+
+using namespace emscripten;
 
 void ShaftGui::setup(std::function<void(string const &)> loadImage)
 {
+    val Objecto = val::global("Objecto");
+
+
+    if(!Objecto.as<bool>())
+    {
+        ofLog()<< "No objecto exists";
+    }
+    else
+    {
+        ofLog() << "Magic";
+    }
+
+
     debugy = "initial"; 
     loadImageFunction = loadImage;
 
