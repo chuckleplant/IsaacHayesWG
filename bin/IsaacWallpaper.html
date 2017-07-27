@@ -254,9 +254,10 @@ var Objecto = class Objecto{
     this.height = 1080;
   }
 
-  get height()
+  methodInteger(a)
   {
-    return this.height;
+    console.log("Height called, number: " + a);
+    //return this.height;
   }
 }
 
@@ -280,23 +281,6 @@ var Objecto = class Objecto{
       var reader = new FileReader();
       reader.onload = function(event) {
         var base64string = reader.result;      
-
-        console.log("Calling c code");
-
-        var byteSize = getByteLen(base64string);
-        var buf = Module._malloc(byteSize);
-
-
-
-        //Module.HEAPU8.set(base64string, buf);
-
-        int_method = Module.cwrap('int_sqrt', 'number', ['number']);
-        int_method(24);
-
-      //Module.ccall('receive_base_64', 'number', ['number'], [buf]);
-        Module._free(buf);
-
-        console.log("Returned from C");
         
       };
       reader.readAsDataURL(f);

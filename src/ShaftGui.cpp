@@ -19,6 +19,13 @@ void ShaftGui::setup(std::function<void(string const &)> loadImage)
         ofLog() << "Magic";
     }
 
+    val julipendio = val::global("Objecto").new_();
+    julipendio.call<void>("methodInteger", 123);
+   // Objecto.call<void>("methodInteger", 123);
+
+   double now = val::global("Date").call<double>("now");
+   ofLog() << "Now : " << now;
+
 
     debugy = "initial"; 
     loadImageFunction = loadImage;
