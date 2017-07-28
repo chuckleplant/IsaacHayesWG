@@ -1,7 +1,7 @@
 #include "ofApp.h"
 #include "ofxAppEmscriptenWindow.h"
 #include <emscripten/val.h>
-#include "ofxBase64.h"
+#include "Base64.h"
 
 using namespace emscripten;
 
@@ -55,9 +55,25 @@ void ofApp::update(){
         string fileStream = julipendio.call<string>("getFileStream");
         ofLog() << "file length" <<fileStream.size();
 
-        ofBuffer imageBuffer; 
-        ofxBase64Decode(fileStream, imageBuffer);
-        ofLog() << "Loaded : " << ofLoadImage(sceneImage.getPixels(), imageBuffer);   
+
+        
+        int decLen = Base64::DecodedLength(fileStream.c_str(), fileStream.size());
+        char * outBuf = new char[decLen];
+        bool decodeSucces = Base64::Decode(fileStream.c_str(), fileStream.size(), outBuf, decLen);
+        if(decodeSucces)
+        {
+            ofBuffer imageBuffer(outBuf, decLen); 
+            ofLog() << "Loaded : " << ofLoadImage(sceneImage.getPixels(), imageBuffer);   
+
+        }
+        else
+        {
+            ofLog()<< "Failed sad";
+        }
+        
+        delete[] outBuf;
+
+        //ofxBase64Decode(fileStream, imageBuffer);
     }
 
     //julipendio.call<void>("methodInteger", 123);
