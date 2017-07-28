@@ -54,6 +54,10 @@ void ofApp::update(){
         ofLogNotice() << "YOO";
         string fileStream = julipendio.call<string>("getFileStream");
         ofLog() << "file length" <<fileStream.size();
+
+        ofBuffer imageBuffer; 
+        ofxBase64Decode(fileStream, imageBuffer);
+        ofLog() << "Loaded : " << ofLoadImage(sceneImage.getPixels(), imageBuffer);   
     }
 
     //julipendio.call<void>("methodInteger", 123);
@@ -76,6 +80,8 @@ void ofApp::draw(){
     ofPopMatrix();
     shaftGui.draw();
     ofDrawBitmapStringHighlight(shaftGui.debugy, ofGetMouseX(), ofGetMouseY());
+
+    sceneImage.draw(mouseX, mouseY);
 }
 
 void ofApp::setupImageResourcesFromImage(string const & imageFilename)
