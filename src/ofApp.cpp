@@ -8,7 +8,7 @@ using namespace emscripten;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
+    sceneImage.allocate(10, 10, OF_IMAGE_COLOR);
 #ifdef TARGET_OSX
 ofLogNotice() << "osx";
 #endif
@@ -37,7 +37,6 @@ ofVec2f ofApp::getRenderDimensions()
 //--------------------------------------------------------------
 void ofApp::update(){
     val Objecto = val::global("Objecto");
-
     if(!Objecto.as<bool>())
     {
         ofLog()<< "No objecto exists";
@@ -51,11 +50,9 @@ void ofApp::update(){
     bool gotFile = julipendio.call<bool>("gotFile");
     if(gotFile)
     {
-        ofLogNotice() << "YOO";
+        ofLogNotice() << "File received from JavaScript";
         string fileStream = julipendio.call<string>("getFileStream");
-        ofLog() << "file length" <<fileStream.size();
-
-
+        ofLog() << "File base64 length : " <<fileStream.size();
         
         int decLen = Base64::DecodedLength(fileStream.c_str(), fileStream.size());
         char * outBuf = new char[decLen];
@@ -63,26 +60,19 @@ void ofApp::update(){
         if(decodeSucces)
         {
             ofBuffer imageBuffer(outBuf, decLen); 
-            ofLog() << "Loaded : " << ofLoadImage(sceneImage.getPixels(), imageBuffer);   
+            ofLog() << "ofBuffer size : " << imageBuffer.size();
+            ofLog() << "Load to image success? : " << ofLoadImage(sceneImage.getPixels(), imageBuffer);   
+            ofLog() << "Pixels w,h : "<< sceneImage.getWidth() << ", " << sceneImage.getHeight();
+            sceneImage.update();
 
         }
         else
         {
-            ofLog()<< "Failed sad";
+            ofLog()<< "Failed to decode base64 file";
         }
-        
         delete[] outBuf;
 
-        //ofxBase64Decode(fileStream, imageBuffer);
     }
-
-    //julipendio.call<void>("methodInteger", 123);
-   // Objecto.call<void>("methodInteger", 123);
-
-   //double now = val::global("Date").call<double>("now");
-    //ofLog() << "Now : " << now;
-
-
 }
 
 //--------------------------------------------------------------

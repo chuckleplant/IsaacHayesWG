@@ -298,7 +298,7 @@ Objecto.fileStream = "";
       var reader = new FileReader();
       reader.onload = function(event) {
         //var base64string = reader.result;
-        Objecto.fileStream = reader.result;
+        Objecto.fileStream = reader.result.split(',').pop();
         Objecto.gotFile = true;
        //int_sqrt = Module.cwrap('int_sqrt', 'number', ['number']);
        // console.log("sqrt working cold cold night - " + int_sqrt(9));
