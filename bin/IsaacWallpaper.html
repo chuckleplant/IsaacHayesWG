@@ -248,19 +248,36 @@
         return byteLen;
   }
 
+
+
 var Objecto = class Objecto{
   constructor()
   {
     this.height = 1080;
+    
+  }
+
+  getFileStream()
+  {
+    Objecto.gotFile = false;
+    return Objecto.fileStream;
+  }
+
+  gotFile()
+  {
+    return Objecto.gotFile;
   }
 
   methodInteger(a)
   {
     console.log("Height called, number: " + a);
+    console.log(document.getElementById('fileLoader').value);
     //return this.height;
   }
 }
 
+Objecto.gotFile = false;
+Objecto.fileStream = "";
 
 
   //Source: https://www.html5rocks.com/en/tutorials/file/dndfiles/
@@ -280,13 +297,20 @@ var Objecto = class Objecto{
 
       var reader = new FileReader();
       reader.onload = function(event) {
-        var base64string = reader.result;      
-        
+        //var base64string = reader.result;
+        Objecto.fileStream = reader.result;
+        Objecto.gotFile = true;
+       //int_sqrt = Module.cwrap('int_sqrt', 'number', ['number']);
+       // console.log("sqrt working cold cold night - " + int_sqrt(9));
+        //console.log("objecto filename : " + Objecto.filename);
       };
       reader.readAsDataURL(f);
 
     }
+
+
     document.getElementById('fileLoader').addEventListener('change', handleFileSelect, false);
+
 
 
   </script>

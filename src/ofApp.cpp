@@ -1,5 +1,10 @@
 #include "ofApp.h"
 #include "ofxAppEmscriptenWindow.h"
+#include <emscripten/val.h>
+#include "ofxBase64.h"
+
+using namespace emscripten;
+
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -31,6 +36,32 @@ ofVec2f ofApp::getRenderDimensions()
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    val Objecto = val::global("Objecto");
+
+    if(!Objecto.as<bool>())
+    {
+        ofLog()<< "No objecto exists";
+    }
+    else
+    {
+        //ofLog() << "Magic";
+    }
+
+    val julipendio = val::global("Objecto").new_();
+    bool gotFile = julipendio.call<bool>("gotFile");
+    if(gotFile)
+    {
+        ofLogNotice() << "YOO";
+        string fileStream = julipendio.call<string>("getFileStream");
+        ofLog() << "file length" <<fileStream.size();
+    }
+
+    //julipendio.call<void>("methodInteger", 123);
+   // Objecto.call<void>("methodInteger", 123);
+
+   //double now = val::global("Date").call<double>("now");
+    //ofLog() << "Now : " << now;
+
 
 }
 

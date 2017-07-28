@@ -80,6 +80,8 @@
 # PROJECT_LDFLAGS=-Wl,-rpath=./libs
 
 PROJECT_LDFLAGS += --bind
+#PROJECT_LDFLAGS += -s EXPORTED_FUNCTIONS="['_int_sqrt']"
+
 
 ################################################################################
 # PROJECT DEFINES

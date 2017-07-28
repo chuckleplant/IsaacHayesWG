@@ -34,6 +34,7 @@
         "atomic": "cpp",
         "__functional_03": "cpp",
         "functional": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "chrono": "cpp"
     }
 }
