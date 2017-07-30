@@ -37,6 +37,7 @@
         "system_error": "cpp",
         "chrono": "cpp",
         "algorithm": "cpp",
-        "__bit_reference": "cpp"
+        "__bit_reference": "cpp",
+        "ios": "cpp"
     }
 }

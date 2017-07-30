@@ -8,6 +8,7 @@ using namespace emscripten;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofSetLogLevel(OF_LOG_VERBOSE);
     sceneImage.allocate(10, 10, OF_IMAGE_COLOR);
     ofLog() << "1";
     shaftGui.setup();

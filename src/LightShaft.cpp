@@ -2,9 +2,6 @@
 #include "ofMain.h"
 LightShaft::LightShaft() 
 {
-    blackness.allocate(20,20,GL_RGBA);
-    sceneBuffer.allocate(20,20,GL_RGBA);
-    shaftComposite.allocate(20,20,GL_RGBA);
 }
 
 
@@ -19,9 +16,11 @@ void LightShaft::setGui(ShaftGui * shaftGui)
 
 void LightShaft::allocateBuffers(ofImage const & loadedImage)
 {
+    ofLog() << "alloc buffers wh - "<< loadedImage.getWidth() << ", " << loadedImage.getHeight();
     blackness.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     sceneBuffer.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     shaftComposite.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
+    ofLog() << "alloc buffers end";
 }
 
 /*
