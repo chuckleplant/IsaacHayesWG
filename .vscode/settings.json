@@ -36,6 +36,7 @@
         "functional": "cpp",
         "system_error": "cpp",
         "chrono": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__bit_reference": "cpp"
     }
 }

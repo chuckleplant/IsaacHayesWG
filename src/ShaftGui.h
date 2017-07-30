@@ -17,9 +17,8 @@ class ShaftGui
 
 		ofParameterGroup parameters;
 		ofxPanel gui;
-		std::function<void(string const &)> loadImageFunction;
     public:
-		void setup(std::function<void(string const &)> loadImage);
+		void setup();
         void draw();
         void loadImageButtonPressed();
         void sunResolutionChanged(int& circleResolution);

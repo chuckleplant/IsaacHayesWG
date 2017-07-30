@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ShaftGui.h"
+#include "LightShaft.h"
 
 class ofApp : public ofBaseApp{
 
@@ -21,12 +22,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		ofVec2f getRenderDimensions();
-		
 		void setupImageResourcesFromImage(string const & imageFilename);
 
     	ShaftGui shaftGui;
-		
+		LightShaft shaft; //You're damn right
 		ofImage sceneImage;
 	private:
 		bool imageLoaded();

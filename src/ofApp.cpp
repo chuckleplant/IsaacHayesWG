@@ -9,17 +9,12 @@ using namespace emscripten;
 //--------------------------------------------------------------
 void ofApp::setup(){
     sceneImage.allocate(10, 10, OF_IMAGE_COLOR);
-#ifdef TARGET_OSX
-ofLogNotice() << "osx";
-#endif
-#ifdef TARGET_WIN32
-ofLogNotice() << "win";
-#endif
-#if defined( TARGET_LINUX ) && defined (OF_USING_GTK)
-ofLogNotice() << "lin";
-#endif
-
-    shaftGui.setup(std::bind(&ofApp::setupImageResourcesFromImage, this, std::placeholders::_1));
+    ofLog() << "1";
+    shaftGui.setup();
+    ofLog() << "2";
+    shaft.setGui(&shaftGui);
+    ofLog() << "3";    
+    shaft.allocateBuffers(sceneImage);
 
     ////
     // Scene params
@@ -29,10 +24,7 @@ ofLogNotice() << "lin";
     ofEnableAlphaBlending();
 }
 
-ofVec2f ofApp::getRenderDimensions()
-{
-    return ofVec2f(sceneImage.getWidth(), sceneImage.getHeight());
-}
+
 
 bool ofApp::imageLoaded()
 {
@@ -79,19 +71,16 @@ bool ofApp::imageLoaded()
 void ofApp::update(){
     if(imageLoaded())
     {
-
+        shaft.allocateBuffers(sceneImage);
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     //Draw background
-    ofPushMatrix();
-    ofVec2f size = getRenderDimensions();
-    ofBackgroundGradient(shaftGui.getAccentColor(), shaftGui.getBaseColor());
-    ofPopMatrix();
-    shaftGui.draw();
-    sceneImage.draw(mouseX, mouseY);
+    ofVec2f sunPos(mouseX, mouseY);
+    //shaft.render(sunPos, sceneImage);
+    //shaft.draw();
 }
 
 void ofApp::setupImageResourcesFromImage(string const & imageFilename)

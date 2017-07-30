@@ -1,10 +1,8 @@
 #include "ShaftGui.h"
 #include "ofxAppEmscriptenWindow.h"
 
-void ShaftGui::setup(std::function<void(string const &)> loadImage)
+void ShaftGui::setup()
 {
-    loadImageFunction = loadImage;
-
     decay.setMin(0.8);
     decay.setMax(1.0);
     exposure.setMin(0.0);
