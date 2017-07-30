@@ -80,7 +80,6 @@
 # PROJECT_LDFLAGS=-Wl,-rpath=./libs
 
 PROJECT_LDFLAGS += --bind
-#PROJECT_LDFLAGS += -s EXPORTED_FUNCTIONS="['_int_sqrt']"
 
 
 ################################################################################
@@ -109,7 +108,9 @@ PROJECT_LDFLAGS += --bind
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-# PROJECT_CFLAGS = 
+# PROJECT_CFLAGS += 
+# PROJECT_EMSCRIPTEN_TEMPLATE=$(OF_LIBS_PATH)/../apps/myApps/IsaacWallpaper/IsaacHayes.template.html
+PROJECT_EMSCRIPTEN_TEMPLATE=$(PROJECT_ROOT)/IsaacHayes.template.html
 
 ################################################################################
 # PROJECT OPTIMIZATION CFLAGS

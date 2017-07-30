@@ -31,37 +31,35 @@ ofLogNotice() << "lin";
 
 ofVec2f ofApp::getRenderDimensions()
 {
-    return ofVec2f(500,500);
+    return ofVec2f(sceneImage.getWidth(), sceneImage.getHeight());
 }
 
-//--------------------------------------------------------------
-void ofApp::update(){
-    val Objecto = val::global("Objecto");
-    if(!Objecto.as<bool>())
+bool ofApp::imageLoaded()
+{
+    val CppBridge = val::global("CppBridge");
+    if(!CppBridge.as<bool>())
     {
-        ofLog()<< "No objecto exists";
-    }
-    else
-    {
-        //ofLog() << "Magic";
+        ofLogError()<< "No CppBridge exists";
+        return false;
     }
 
-    val julipendio = val::global("Objecto").new_();
-    bool gotFile = julipendio.call<bool>("gotFile");
+    val cppBridge = val::global("CppBridge").new_();
+    bool gotFile = cppBridge.call<bool>("gotFile");
     if(gotFile)
     {
         ofLogNotice() << "File received from JavaScript";
-        string fileStream = julipendio.call<string>("getFileStream");
+        string fileStream = cppBridge.call<string>("getFileStream");
         ofLog() << "File base64 length : " <<fileStream.size();
         
         int decLen = Base64::DecodedLength(fileStream.c_str(), fileStream.size());
         char * outBuf = new char[decLen];
         bool decodeSucces = Base64::Decode(fileStream.c_str(), fileStream.size(), outBuf, decLen);
+        bool loadSuccess = false;
         if(decodeSucces)
         {
             ofBuffer imageBuffer(outBuf, decLen); 
             ofLog() << "ofBuffer size : " << imageBuffer.size();
-            ofLog() << "Load to image success? : " << ofLoadImage(sceneImage.getPixels(), imageBuffer);   
+            loadSuccess = ofLoadImage(sceneImage.getPixels(), imageBuffer);   
             ofLog() << "Pixels w,h : "<< sceneImage.getWidth() << ", " << sceneImage.getHeight();
             sceneImage.update();
 
@@ -71,6 +69,16 @@ void ofApp::update(){
             ofLog()<< "Failed to decode base64 file";
         }
         delete[] outBuf;
+        return loadSuccess;
+    }
+    return false;
+}
+
+
+//--------------------------------------------------------------
+void ofApp::update(){
+    if(imageLoaded())
+    {
 
     }
 }
@@ -80,13 +88,9 @@ void ofApp::draw(){
     //Draw background
     ofPushMatrix();
     ofVec2f size = getRenderDimensions();
-    //ofScale(size.x, size.y);
-    //ofBackgroundGradient(accentColor, baseColor);
     ofBackgroundGradient(shaftGui.getAccentColor(), shaftGui.getBaseColor());
     ofPopMatrix();
     shaftGui.draw();
-    ofDrawBitmapStringHighlight(shaftGui.debugy, ofGetMouseX(), ofGetMouseY());
-
     sceneImage.draw(mouseX, mouseY);
 }
 

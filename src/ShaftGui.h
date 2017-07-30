@@ -14,14 +14,11 @@ class ShaftGui
     	ofParameter<int> numSamples;
     	ofParameter<int> sunResolution;
     	ofParameter<bool> moveSun;
-    	ofxButton loadImageButton;
-    	ofxButton saveSnapshotButton;
 
 		ofParameterGroup parameters;
 		ofxPanel gui;
 		std::function<void(string const &)> loadImageFunction;
     public:
-string debugy;
 		void setup(std::function<void(string const &)> loadImage);
         void draw();
         void loadImageButtonPressed();

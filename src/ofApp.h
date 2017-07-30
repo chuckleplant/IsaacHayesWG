@@ -26,6 +26,9 @@ class ofApp : public ofBaseApp{
 		void setupImageResourcesFromImage(string const & imageFilename);
 
     	ShaftGui shaftGui;
+		
 		ofImage sceneImage;
+	private:
+		bool imageLoaded();
 		
 };

@@ -1,22 +1,8 @@
 #include "ShaftGui.h"
 #include "ofxAppEmscriptenWindow.h"
 
-#define STRINGIFY(s) #s 
-
-
-
-extern "C"
-{
-    int int_sqrt(int x)
-    {
-        return sqrt(x);
-    }
-}
-
 void ShaftGui::setup(std::function<void(string const &)> loadImage)
 {
-
-    debugy = "initial"; 
     loadImageFunction = loadImage;
 
     decay.setMin(0.8);
@@ -49,12 +35,8 @@ void ShaftGui::setup(std::function<void(string const &)> loadImage)
     parameters.add(accentColor.set("Accent color", ofColor(235,215,167)));
     parameters.add(sunColor.set("Sun color", ofColor::orangeRed));
     
-    loadImageButton.addListener(this, &ShaftGui::loadImageButtonPressed);
-    saveSnapshotButton.addListener(this, &ShaftGui::saveSnapshot);
     
     gui.setup(parameters);
-    gui.add(loadImageButton.setup("Load image"));
-    gui.add(saveSnapshotButton.setup("Save image"));
     
     gui.setPosition(100, 100);
 }
@@ -77,65 +59,6 @@ ofColor const & ShaftGui::getSunColor() const
 void ShaftGui::draw()
 {
     gui.draw();
-}
-
-extern "C"{
-    void testJSCall(int x)
-    {
-        printf("Size %d", x);
-    }
-}
-
-
-
-extern "C" 
-{
-    int receive_base_64(int ptr)
-    {
-        printf("pointer at %d", ptr);
-    }    
-}
-
-
-void ShaftGui::loadImageButtonPressed()
-{
-/*         int test_int = emscripten_run_script_int(STRINGIFY(
-            function loadDialog()
-            {
-                var input = document.createElement('input');
-                input.type = 'file';
-                input.click();
-                return input.data.length;
-                //var reader = new FileReader();
-                //var stringfile = reader.reasAsBinaryString(input.data);
-                //return stringfile.length;
-            }
-            loadDialog();
-        ));
-        ofLogNotice() << "int : " << test_int; */
-
-
-
- 
-        char * somestring = emscripten_run_script_string(STRINGIFY(
-            function loadDialog()
-            {
-                var input = document.createElement('input');
-                input.type = 'file';
-                input.click();
-                return "Whot";
-                //return input.value;
-
-               // var reader = new FileReader();
-                //reader.reasAsBinaryString(input.data);
-                
-            }
-            loadDialog();
-        )
-        );
-
-        ofLogNotice() << "File as string? : " << somestring; 
-
 }
 
 void ShaftGui::sunResolutionChanged(int& circleResolution)
