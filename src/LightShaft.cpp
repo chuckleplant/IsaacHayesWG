@@ -20,7 +20,7 @@ void LightShaft::allocateBuffers(ofImage const & loadedImage)
     blackness.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     sceneBuffer.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     shaftComposite.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
-    ofLog() << "alloc buffers end";
+    sceneImage = ofImage(loadedImage);
 }
 
 /*
@@ -68,5 +68,6 @@ void LightShaft::render(ofVec2f const & sunPosition, ofImage const & sceneImage)
 
 void LightShaft::draw()
 {
-    sceneBuffer.draw(0,0);
+    sceneImage.draw(ofGetMouseX(),ofGetMouseY());
+    //sceneBuffer.draw(0,0);
 }

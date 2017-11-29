@@ -69,16 +69,17 @@ bool ofApp::imageLoaded()
 void ofApp::update(){
     if(imageLoaded())
     {
-        shaft.allocateBuffers(sceneImage);
+        shaft.allocateBuffers(sceneImage);   
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     //Draw background
-    ofVec2f sunPos(mouseX, mouseY);
+    //ofVec2f sunPos(mouseX, mouseY);
     //shaft.render(sunPos, sceneImage);
-    //shaft.draw();
+    shaft.draw();
+    shaftGui.draw();
 }
 
 void ofApp::setupImageResourcesFromImage(string const & imageFilename)

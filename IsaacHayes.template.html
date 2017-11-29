@@ -242,7 +242,12 @@
             }
 
             gotFile() {
-                return CppBridge.gotFile;
+                var didWe = CppBridge.gotFile;
+                CppBridge.gotFile = false;
+                if(didWe){
+                    console.log("Image was loaded, returning true to main app.");
+                }
+                return didWe;
             }
         }
 

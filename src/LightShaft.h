@@ -17,5 +17,6 @@ private:
     ofFbo blackness;
     ofFbo sceneBuffer;
     ofFbo shaftComposite;
+    ofImage sceneImage;
     ShaftGui * gui;
 };
