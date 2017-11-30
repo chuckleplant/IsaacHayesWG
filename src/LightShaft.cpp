@@ -1,6 +1,6 @@
 #include "LightShaft.h"
 #include "ofMain.h"
-LightShaft::LightShaft() 
+LightShaft::LightShaft() : bLocked(false)
 {
 }
 
@@ -65,9 +65,18 @@ void LightShaft::render(ofVec2f const & sunPosition, ofImage const & sceneImage)
     
 }
 
+void LightShaft::toggleLock()
+{
+    bLocked = !bLocked;
+}
 
 void LightShaft::draw()
 {
-    sceneImage.draw(ofGetMouseX(),ofGetMouseY());
+    if(!bLocked)
+    {
+        cursorPosition.x = ofGetMouseX();
+        cursorPosition.y = ofGetMouseY();
+    }
+    sceneImage.draw(cursorPosition.x, cursorPosition.y);
     //sceneBuffer.draw(0,0);
 }
