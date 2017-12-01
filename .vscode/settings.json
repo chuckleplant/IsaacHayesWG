@@ -39,5 +39,6 @@
         "algorithm": "cpp",
         "__bit_reference": "cpp",
         "ios": "cpp"
-    }
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

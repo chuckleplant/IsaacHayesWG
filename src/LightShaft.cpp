@@ -1,6 +1,11 @@
 #include "LightShaft.h"
 #include "ofMain.h"
-LightShaft::LightShaft() : bLocked(false)
+using namespace glm;
+using namespace std;
+
+LightShaft::LightShaft() : 
+    bLocked(false), 
+    imageDimension(10,10)
 {
 }
 
@@ -16,11 +21,13 @@ void LightShaft::setGui(ShaftGui * shaftGui)
 
 void LightShaft::allocateBuffers(ofImage const & loadedImage)
 {
-    ofLog() << "alloc buffers wh - "<< loadedImage.getWidth() << ", " << loadedImage.getHeight();
+    imageDimension.w = loadedImage.getWidth();
+    imageDimension.h = loadedImage.getHeight();
     blackness.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     sceneBuffer.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     shaftComposite.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     sceneImage = ofImage(loadedImage);
+    resizeLayout();
 }
 
 /*
@@ -65,6 +72,30 @@ void LightShaft::render(ofVec2f const & sunPosition, ofImage const & sceneImage)
     
 }
 
+void LightShaft::setWindowSize(int windowWidth, int windowHeight)
+{
+    windowDimension.x = windowWidth;
+    windowDimension.y = windowHeight;
+}
+
+void LightShaft::resizeLayout()
+{
+    float imageAspect = imageDimension.x/(float)imageDimension.y;
+    float windowAspect = windowDimension.x/(float)windowDimension.y;
+    if(imageAspect > windowAspect){
+        renderLayout.x = 0;
+        renderLayout.width = windowDimension.x;
+        renderLayout.height = windowDimension.x / imageAspect;
+        renderLayout.y = (windowDimension.y - renderLayout.height)/2;
+    }
+    else{
+        renderLayout.y = 0;
+        renderLayout.height = windowDimension.y;
+        renderLayout.width = windowDimension.y * imageAspect;
+        renderLayout.x = (windowDimension.x - renderLayout.width)/2;
+    }
+}
+
 void LightShaft::toggleLock()
 {
     bLocked = !bLocked;
@@ -78,5 +109,8 @@ void LightShaft::draw()
         cursorPosition.y = ofGetMouseY();
     }
     sceneImage.draw(cursorPosition.x, cursorPosition.y);
+    ofSetLineWidth(10);
+    ofSetColor(ofColor::pink);
+    ofDrawRectangle(renderLayout);
     //sceneBuffer.draw(0,0);
 }

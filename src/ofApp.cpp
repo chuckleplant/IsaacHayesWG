@@ -13,6 +13,7 @@ void ofApp::setup(){
     shaftGui.setup();
     shaft.setGui(&shaftGui);
     shaft.allocateBuffers(sceneImage);
+    shaft.setWindowSize(ofGetWindowWidth(), ofGetWindowHeight());
 
     ////
     // Scene params
@@ -141,7 +142,6 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
 }
 
 //--------------------------------------------------------------
