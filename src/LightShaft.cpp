@@ -4,8 +4,8 @@ using namespace glm;
 using namespace std;
 
 LightShaft::LightShaft() : 
-    bLocked(false), 
-    imageDimension(10,10)
+    imageDimension(10,10),
+    bLocked(false)
 {
 }
 
@@ -21,8 +21,8 @@ void LightShaft::setGui(ShaftGui * shaftGui)
 
 void LightShaft::allocateBuffers(ofImage const & loadedImage)
 {
-    imageDimension.w = loadedImage.getWidth();
-    imageDimension.h = loadedImage.getHeight();
+    imageDimension.x = loadedImage.getWidth();
+    imageDimension.y = loadedImage.getHeight();
     blackness.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     sceneBuffer.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     shaftComposite.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
