@@ -17,6 +17,7 @@ LightShaft::~LightShaft()
 void LightShaft::setGui(ShaftGui * shaftGui)
 {
     gui = shaftGui;
+    ofLog() << "Load shaders : "<< shader.loadShaders();
 }
 
 void LightShaft::allocateBuffers(ofImage const & loadedImage)
@@ -108,9 +109,14 @@ void LightShaft::draw()
         cursorPosition.x = ofGetMouseX();
         cursorPosition.y = ofGetMouseY();
     }
-    sceneImage.draw(cursorPosition.x, cursorPosition.y);
+
+    //sceneImage.draw(cursorPosition.x, cursorPosition.y);
     ofSetLineWidth(10);
-    ofSetColor(ofColor::pink);
-    ofDrawRectangle(renderLayout);
+    ofSetColor(ofColor::white);
+    sceneImage.draw(renderLayout);
+
+
+    ofSetColor(gui->getSunColor());
+    ofDrawCircle(cursorPosition.x, cursorPosition.y, gui->getSunRadius());
     //sceneBuffer.draw(0,0);
 }

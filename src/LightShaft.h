@@ -3,6 +3,7 @@
 #include "ofVec2f.h"
 #include "ofImage.h"
 #include "ShaftGui.h"
+#include "ShaftShader.h"
 
 class LightShaft
 {
@@ -27,6 +28,7 @@ private:
     ofImage sceneImage;
     ofRectangle renderLayout;
     ShaftGui * gui;
+    ShaftShader shader;
 
     void resizeLayout();
 };

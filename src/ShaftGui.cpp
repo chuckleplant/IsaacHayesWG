@@ -61,6 +61,7 @@ void ShaftGui::draw()
 
 void ShaftGui::sunResolutionChanged(int& circleResolution)
 {
+    ofSetCircleResolution(circleResolution);
 }
 
 void ShaftGui::saveSnapshot()

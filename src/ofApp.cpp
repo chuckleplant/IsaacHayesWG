@@ -9,6 +9,7 @@ using namespace emscripten;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetLogLevel(OF_LOG_VERBOSE);
+    ofSetLogLevel("ofShader", OF_LOG_VERBOSE);
     sceneImage.allocate(10, 10, OF_IMAGE_COLOR);
     shaftGui.setup();
     shaft.setGui(&shaftGui);
@@ -76,6 +77,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofBackground(ofColor::black);
     //Draw background
     //ofVec2f sunPos(mouseX, mouseY);
     //shaft.render(sunPos, sceneImage);
