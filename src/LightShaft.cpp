@@ -111,9 +111,13 @@ void LightShaft::draw()
     }
 
     //sceneImage.draw(cursorPosition.x, cursorPosition.y);
-    ofSetLineWidth(10);
+    
     ofSetColor(ofColor::white);
-    sceneImage.draw(renderLayout);
+    
+    shader.begin();
+        shader.setUniformTexture("image", sceneImage.getTexture(),1);
+        sceneImage.draw(renderLayout);
+    shader.end();
 
 
     ofSetColor(gui->getSunColor());
