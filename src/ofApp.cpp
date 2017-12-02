@@ -12,10 +12,10 @@ void ofApp::setup(){
     ofSetLogLevel("ofShader", OF_LOG_VERBOSE);
     sceneImage.allocate(10, 10, OF_IMAGE_COLOR);
     shaftGui.setup();
-    shaft.setGui(&shaftGui);
-    shaft.allocateBuffers(sceneImage);
     shaft.setWindowSize(ofGetWindowWidth(), ofGetWindowHeight());
-
+    shaft.setGui(&shaftGui);
+    //shaft.allocateBuffers(sceneImage);
+    ofLog() << " DATA PATH " << ofToDataPath("file");
     ////
     // Scene params
     //ofBackground(0, 0, 0);

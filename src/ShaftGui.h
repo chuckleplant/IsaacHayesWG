@@ -8,7 +8,6 @@ class ShaftGui
     	ofParameter<ofColor> sunColor;
     	ofParameter<float> sunRadius;
     	ofParameter<float> decay;
-    	ofParameter<float> exposure;
     	ofParameter<float> density;
     	ofParameter<float> weight;
     	ofParameter<int> numSamples;
@@ -29,7 +28,6 @@ class ShaftGui
 		ofColor const & getSunColor() const;
         float const & getSunRadius() const;
         float const & getDecay() const;
-        float const & getExposure() const;
         float const & getDensity() const;
         float const & getWeight() const;
         int const & getNumSamples() const;

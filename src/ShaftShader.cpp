@@ -28,7 +28,6 @@ ShaftShader::ShaftShader()
         //
         uniform vec2 lightPosition;
         uniform float decay;
-        uniform float exposure;
         uniform float density;
         uniform float weight;
         uniform int numSamples;
@@ -55,7 +54,6 @@ ShaftShader::ShaftShader()
                 illuminationDecay *= decay;
             }
             gl_FragColor = sceneCol + color;
-            //gl_FragColor = texture2D(scene, texCoordVar);
         }
     );
 }

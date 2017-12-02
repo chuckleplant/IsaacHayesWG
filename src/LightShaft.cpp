@@ -1,5 +1,6 @@
 #include "LightShaft.h"
 #include "ofMain.h"
+#include "ofFileUtils.h"
 using namespace glm;
 using namespace std;
 
@@ -17,13 +18,26 @@ LightShaft::~LightShaft()
 void LightShaft::setGui(ShaftGui * shaftGui)
 {
     gui = shaftGui;
+
     ofLog() << "Load shaders : "<< shader.loadShaders();
+
+    ofBuffer buf = ofBufferFromFile(ofToDataPath("RDR2.png"));
+    ofPixels wut;
+    if(ofLoadImage(wut, buf))
+    {
+       ofLog() << "Loaded image, wxh = "<< wut.getWidth() <<","<< wut.getHeight();
+       sceneImage.setFromPixels(wut.getData(), wut.getWidth(), wut.getHeight(), OF_IMAGE_COLOR_ALPHA);
+       sceneImage.update();
+       allocateBuffers(sceneImage);
+    }
+    
 }
 
 void LightShaft::allocateBuffers(ofImage const & loadedImage)
 {
     imageDimension.x = loadedImage.getWidth();
     imageDimension.y = loadedImage.getHeight();
+    ofLog() << "Allocating buffers : (" << imageDimension.x <<", "<<imageDimension.y <<")";
     blackness.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     sceneBuffer.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     shaftComposite.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
@@ -113,7 +127,6 @@ void LightShaft::draw()
         cursorPosition.y = normalizedMousePos.y * (imageDimension.y);
     }
 
-
     // Draw shaft mask
     //
     //
@@ -128,8 +141,6 @@ void LightShaft::draw()
     // Draw scene
     //
     //
-    float fboScaleWidth  = sceneBuffer.getWidth()/windowDimension.x;
-    float fboScaleHeight = sceneBuffer.getHeight()/windowDimension.y;
     sceneBuffer.begin();
         ofClear(0, 1);
         ofSetColor(255);
@@ -150,7 +161,6 @@ void LightShaft::draw()
             shader.setUniformTexture("lightMap", blackness.getTexture(), 2);
             shader.setUniform2f("lightPosition", normalizedLightPos);
             shader.setUniform1f("decay", gui->getDecay());
-            shader.setUniform1f("exposure", gui->getExposure());
             shader.setUniform1f("density", gui->getDensity());
             shader.setUniform1f("weight", gui->getWeight());
             shader.setUniform1i("numSamples", gui->getNumSamples());
