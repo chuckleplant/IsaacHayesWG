@@ -106,14 +106,80 @@ void LightShaft::draw()
 {
     if(!bLocked)
     {
-        cursorPosition.x = ofGetMouseX();
-        cursorPosition.y = ofGetMouseY();
+        unsigned int originMouseX = ofGetMouseX() - renderLayout.x;
+        unsigned int originMouseY = ofGetMouseY() - renderLayout.y;
+        ofVec2f normalizedMousePos = ofVec2f(originMouseX / renderLayout.width, originMouseY / renderLayout.height);
+        cursorPosition.x = normalizedMousePos.x * (imageDimension.x);
+        cursorPosition.y = normalizedMousePos.y * (imageDimension.y);
     }
 
-    //sceneImage.draw(cursorPosition.x, cursorPosition.y);
-    
+
+    // Draw shaft mask
+    //
+    //
+    blackness.begin();
+    ofClear(0,0);
+    ofSetColor(gui->getSunColor());
+    ofDrawCircle(cursorPosition.x, cursorPosition.y, gui->getSunRadius());
+    ofSetColor(ofColor::black);
+    sceneImage.draw(0,0);
+    blackness.end();
+
+    // Draw scene
+    //
+    //
+    float fboScaleWidth  = sceneBuffer.getWidth()/windowDimension.x;
+    float fboScaleHeight = sceneBuffer.getHeight()/windowDimension.y;
+    sceneBuffer.begin();
+        ofClear(0, 1);
+        ofSetColor(255);
+        ofBackgroundGradient(gui->getAccentColor(), gui->getBaseColor());
+        ofDrawCircle(cursorPosition.x, cursorPosition.y, gui->getSunRadius());
+        sceneImage.draw(0,0);
+    sceneBuffer.end();
+
+
+    // Draw shaft composite 
+    //
+    //
+    shaftComposite.begin();
+        ofClear(0, 0);
+        glm::vec2 normalizedLightPos = glm::vec2(cursorPosition.x / (float)imageDimension.x, cursorPosition.y / (float)imageDimension.y);
+        shader.begin();
+            shader.setUniformTexture("scene", sceneBuffer.getTexture(), 1);
+            shader.setUniformTexture("lightMap", blackness.getTexture(), 2);
+            shader.setUniform2f("lightPosition", normalizedLightPos);
+            shader.setUniform1f("decay", gui->getDecay());
+            shader.setUniform1f("exposure", gui->getExposure());
+            shader.setUniform1f("density", gui->getDensity());
+            shader.setUniform1f("weight", gui->getWeight());
+            shader.setUniform1i("numSamples", gui->getNumSamples());
+            ofFill();
+            sceneImage.draw(0,0,windowDimension.x,windowDimension.y);
+        shader.end();
+    shaftComposite.end();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ofSetColor(ofColor::white);
+    shaftComposite.draw(0,0);
+
+
+
+
     
+    /*
     shader.begin();
         shader.setUniformTexture("image", sceneImage.getTexture(),1);
         sceneImage.draw(renderLayout);
@@ -123,4 +189,5 @@ void LightShaft::draw()
     ofSetColor(gui->getSunColor());
     ofDrawCircle(cursorPosition.x, cursorPosition.y, gui->getSunRadius());
     //sceneBuffer.draw(0,0);
+    */
 }

@@ -21,6 +21,7 @@ void ofApp::setup(){
     //ofBackground(0, 0, 0);
     //ofSetVerticalSync(true);
     //ofDisableDepthTest();
+    ofDisableArbTex();
     ofEnableAlphaBlending();
 }
 

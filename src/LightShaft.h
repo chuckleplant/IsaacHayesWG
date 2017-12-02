@@ -22,9 +22,11 @@ private:
     glm::vec2 windowDimension;
     glm::vec2 cursorPosition;
     bool bLocked;
+    
     ofFbo blackness;
     ofFbo sceneBuffer;
     ofFbo shaftComposite;
+
     ofImage sceneImage;
     ofRectangle renderLayout;
     ShaftGui * gui;

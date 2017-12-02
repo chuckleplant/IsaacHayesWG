@@ -18,15 +18,44 @@ ShaftShader::ShaftShader()
 
     fragShader = STRINGIFY(
         precision highp float;
-        uniform sampler2D image;
+        //
+        // Sampler uniforms
+        //
+        uniform sampler2D lightMap;
+        uniform sampler2D scene;
+        //
+        // Uniforms set from app
+        //
+        uniform vec2 lightPosition;
+        uniform float decay;
+        uniform float exposure;
+        uniform float density;
+        uniform float weight;
+        uniform int numSamples;
+        const int max_its = 300;
+        //
+        // Varyings
+        //         
         varying vec2 texCoordVar;
         void main()
         {
-            // gl_FragCoord contains the window relative coordinate for the fragment.
-            // we use gl_FragCoord.x position to control the red color value.
-            // we use gl_FragCoord.y position to control the green color value.
-            // please note that all r, g, b, a values are between 0 and 1.
-            gl_FragColor = texture2D(image, texCoordVar);
+            vec2 tc = texCoordVar;
+            vec4 sceneCol = texture2D(scene,tc);
+            vec2 deltaTexCoord = (tc - lightPosition);
+            deltaTexCoord *= 1.0 / float(numSamples) * density;
+            float illuminationDecay = 1.0;
+            vec4 color = texture2D(lightMap, tc) * 0.4;
+            for(int i=0; i < max_its ; i++)
+            {
+                if(i == numSamples) break; // In GLSL ES for loops with non const variables do not work
+                tc -= deltaTexCoord;
+                vec4 sample = texture2D(lightMap, tc) * 0.4;
+                sample *= illuminationDecay * weight;
+                color += sample;
+                illuminationDecay *= decay;
+            }
+            gl_FragColor = sceneCol + color;
+            //gl_FragColor = texture2D(scene, texCoordVar);
         }
     );
 }
