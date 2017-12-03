@@ -2,10 +2,12 @@
 #include "ofMain.h"
 #include "ofFileUtils.h"
 #include "emscripten.h"
+#include <emscripten/val.h>
 #include "Base64.h"
 #include "ofEvents.h"
 using namespace glm;
 using namespace std;
+using namespace emscripten;
 
 
 LightShaft::LightShaft() : 
@@ -112,26 +114,69 @@ void LightShaft::resizeLayout()
     }
 }
 
+
+bool LightShaft::encodeFrameBase64(std::string & output)
+{
+    ofPixels renderPix;
+    shaftComposite.readToPixels(renderPix);
+    ofBuffer pngBuffer;
+    ofSaveImage(renderPix, pngBuffer);
+    if(pngBuffer.size() > 0)
+    {
+        auto numBytes = pngBuffer.size();
+        auto encodedLength = Base64::EncodedLength(numBytes);
+
+        output.resize(encodedLength);
+        const char * input = reinterpret_cast<const char *>(pngBuffer.getData());
+        return Base64::Encode(input, numBytes, &output[0], output.size());
+    }
+
+
+    //auto numBytes = w * h * renderPix.getNumChannels();
+    //auto encodedLength = Base64::EncodedLength(numBytes);
+    //string encodedFrame;
+    //encodedFrame.resize(encodedLength);
+    //const char * input = reinterpret_cast<const char *>(renderPix.getData());
+    //if(Base64::Encode(input, numBytes, &encodedFrame[0], encodedFrame.size()))
+    //{
+//
+    //}
+    return false;
+}
+
+
+void LightShaft::submitFrameToBrowser(std::string const & frame64)
+{
+    val CppBridge = val::global("CppBridge");
+    if(!CppBridge.as<bool>())
+    {
+        ofLogError()<< "No CppBridge exists";        
+    }
+    else
+    {
+        val cppBridge = val::global("CppBridge").new_();
+        if(cppBridge.call<bool>("saveFramePNG", frame64))
+        {
+            ofLog() << "Submission to browser succeeded.";
+        }
+    }
+}
+
+
+
 void LightShaft::update(ofEventArgs&)
 {
     if(saveFlag)
     {
-        ofPixels renderPix;
-        shaftComposite.readToPixels(renderPix);
-        auto numBytes = renderPix.getWidth() * renderPix.getHeight() * renderPix.getNumChannels();
-        auto encodedLength = Base64::EncodedLength(numBytes);
         string encodedFrame;
-        encodedFrame.resize(encodedLength);
-        const char * input = reinterpret_cast<const char *>(renderPix.getData());
-        if(Base64::Encode(input, numBytes, &encodedFrame[0], encodedFrame.size()))
+        if(encodeFrameBase64(encodedFrame))
         {
-            ofLog() << "Base64 encoded frame has "<< encodedFrame.size() << " size";
-        }
+            submitFrameToBrowser(encodedFrame);
+        } 
         else
         {
             ofLogError() << "Failed to encode frame";
         }
-
         saveFlag = false;
     }
 }

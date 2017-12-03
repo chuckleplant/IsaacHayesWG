@@ -35,4 +35,6 @@ private:
     bool saveFlag;
 
     void resizeLayout();
+    bool encodeFrameBase64(std::string & output);
+    void submitFrameToBrowser(std::string const & frame64);
 };

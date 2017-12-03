@@ -146,7 +146,7 @@
         <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
     </div>
     <textarea id="output" rows="8"></textarea>
-
+    <script src="FileSaver.js"></script>
     <script type='text/javascript'>
         var statusElement = document.getElementById('status');
         var progressElement = document.getElementById('progress');
@@ -236,9 +236,17 @@
         var CppBridge = class CppBridge {
             constructor() {}
 
-            testString(theword)
+            saveFramePNG(base64RGBA)
             {
-                console.log(theword);
+                var decodedPNG = atob(base64RGBA);
+                var byteNumbers = new Array(decodedPNG.length);
+                for (var i = 0; i < decodedPNG.length; i++) {
+                    byteNumbers[i] = decodedPNG.charCodeAt(i);
+                }
+                var byteArray = new Uint8Array(byteNumbers);
+                var blob = new Blob([byteArray], {type: "image/png"});
+                saveAs(blob, "IsaacHayes-Shaft-Wallpaper.png");
+                return true;
             }
 
             getFileStream() {
