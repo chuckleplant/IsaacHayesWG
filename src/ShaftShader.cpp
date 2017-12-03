@@ -67,10 +67,8 @@ ShaftShader::~ShaftShader()
 
 bool ShaftShader::loadShaders()
 {
-    ofLog() << "frag: " << ofShader::setupShaderFromSource(GL_FRAGMENT_SHADER, fragShader);
-    ofLog() << "vert: " << ofShader::setupShaderFromSource(GL_VERTEX_SHADER, vertShader);
-    ofLog() << "binddef: " << ofShader::bindDefaults();
-    ofLog() << "link: " << ofShader::linkProgram();
-    return false;
-
+    return ofShader::setupShaderFromSource(GL_FRAGMENT_SHADER, fragShader) &&
+    ofShader::setupShaderFromSource(GL_VERTEX_SHADER, vertShader) &&
+    ofShader::bindDefaults() &&
+    ofShader::linkProgram();
 }

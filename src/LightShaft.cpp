@@ -37,7 +37,6 @@ void LightShaft::allocateBuffers(ofImage const & loadedImage)
 {
     imageDimension.x = loadedImage.getWidth();
     imageDimension.y = loadedImage.getHeight();
-    ofLog() << "Allocating buffers : (" << imageDimension.x <<", "<<imageDimension.y <<")";
     blackness.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     sceneBuffer.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
     shaftComposite.allocate(loadedImage.getWidth(), loadedImage.getHeight(), GL_RGBA);
@@ -45,16 +44,7 @@ void LightShaft::allocateBuffers(ofImage const & loadedImage)
     resizeLayout();
 }
 
-/*
-void ofApp::renderBackground(ofFbo const & targetBuffer)
-{
-    ofPushMatrix();
-    ofVec2f fboScale = ofVec2f(targetBuffer.getWidth() / ofGetWindowWidth(), targetBuffer.getHeight() / ofGetWindowHeight());
-    ofScale(fboScale);
-    ofBackgroundGradient(accentColor, baseColor);
-    ofPopMatrix();
-}
-*/
+
 
 void LightShaft::render(ofVec2f const & sunPosition, ofImage const & sceneImage)
 {
@@ -131,13 +121,13 @@ void LightShaft::draw()
     //
     //
     blackness.begin();
-    ofClear(0,0);
-    ofSetColor(gui->getSunColor());
-    ofDrawCircle(cursorPosition.x, cursorPosition.y, gui->getSunRadius());
-    ofSetColor(ofColor::black);
-    sceneImage.draw(0,0);
+        ofClear(0,0);
+        ofSetColor(gui->getSunColor());
+        ofDrawCircle(cursorPosition.x, cursorPosition.y, gui->getSunRadius());
+        ofSetColor(ofColor::black);
+        sceneImage.draw(0,0);
     blackness.end();
-
+    
     // Draw scene
     //
     //
@@ -165,39 +155,10 @@ void LightShaft::draw()
             shader.setUniform1f("weight", gui->getWeight());
             shader.setUniform1i("numSamples", gui->getNumSamples());
             ofFill();
-            sceneImage.draw(0,0,windowDimension.x,windowDimension.y);
+            sceneImage.draw(0,0);
         shader.end();
     shaftComposite.end();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     ofSetColor(ofColor::white);
-    shaftComposite.draw(0,0);
-
-
-
-
-    
-    /*
-    shader.begin();
-        shader.setUniformTexture("image", sceneImage.getTexture(),1);
-        sceneImage.draw(renderLayout);
-    shader.end();
-
-
-    ofSetColor(gui->getSunColor());
-    ofDrawCircle(cursorPosition.x, cursorPosition.y, gui->getSunRadius());
-    //sceneBuffer.draw(0,0);
-    */
+    shaftComposite.draw(renderLayout);
 }

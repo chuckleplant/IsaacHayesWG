@@ -8,19 +8,12 @@ using namespace emscripten;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetLogLevel(OF_LOG_VERBOSE);
-    ofSetLogLevel("ofShader", OF_LOG_VERBOSE);
+    ofSetLogLevel(OF_LOG_NOTICE);
+    ofSetLogLevel("ofShader", OF_LOG_SILENT);
     sceneImage.allocate(10, 10, OF_IMAGE_COLOR);
     shaftGui.setup();
     shaft.setWindowSize(ofGetWindowWidth(), ofGetWindowHeight());
     shaft.setGui(&shaftGui);
-    //shaft.allocateBuffers(sceneImage);
-    ofLog() << " DATA PATH " << ofToDataPath("file");
-    ////
-    // Scene params
-    //ofBackground(0, 0, 0);
-    //ofSetVerticalSync(true);
-    //ofDisableDepthTest();
     ofDisableArbTex();
     ofEnableAlphaBlending();
 }
@@ -40,9 +33,8 @@ bool ofApp::imageLoaded()
     bool gotFile = cppBridge.call<bool>("gotFile");
     if(gotFile)
     {
-        ofLogNotice() << "File received from JavaScript";
+        ofLogNotice() << "File received from browser";
         string fileStream = cppBridge.call<string>("getFileStream");
-        ofLog() << "File base64 length : " <<fileStream.size();
         
         int decLen = Base64::DecodedLength(fileStream.c_str(), fileStream.size());
         char * outBuf = new char[decLen];
@@ -50,10 +42,8 @@ bool ofApp::imageLoaded()
         bool loadSuccess = false;
         if(decodeSucces)
         {
-            ofBuffer imageBuffer(outBuf, decLen); 
-            ofLog() << "ofBuffer size : " << imageBuffer.size();
-            loadSuccess = ofLoadImage(sceneImage.getPixels(), imageBuffer);   
-            ofLog() << "Pixels w,h : "<< sceneImage.getWidth() << ", " << sceneImage.getHeight();
+            ofBuffer imageBuffer(outBuf, decLen);
+            loadSuccess = ofLoadImage(sceneImage.getPixels(), imageBuffer);
             sceneImage.update();
 
         }
