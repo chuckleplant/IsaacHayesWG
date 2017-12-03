@@ -12,8 +12,9 @@ class ShaftGui
     	ofParameter<float> weight;
     	ofParameter<int> numSamples;
     	ofParameter<int> sunResolution;
-    	ofParameter<bool> moveSun;
-
+    	ofParameter<bool> cursorMoves;
+		
+		ofxButton saveImageButton;
 		ofParameterGroup parameters;
 		ofxPanel gui;
     public:
@@ -22,7 +23,10 @@ class ShaftGui
         void loadImageButtonPressed();
         void sunResolutionChanged(int& circleResolution);
 	    void saveSnapshot();
+		void toggleCursor();
+		void savePressed();
 
+		ofxButton & getSaveButton();
 		ofColor const & getBaseColor() const;
 		ofColor const & getAccentColor() const;
 		ofColor const & getSunColor() const;
@@ -32,7 +36,7 @@ class ShaftGui
         float const & getWeight() const;
         int const & getNumSamples() const;
         int const & getSunResolution() const;
-        bool const & isSunMoving() const;
+        bool const & isCursorMoving() const;
 
         
 };

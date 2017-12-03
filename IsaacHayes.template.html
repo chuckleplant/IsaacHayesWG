@@ -236,6 +236,11 @@
         var CppBridge = class CppBridge {
             constructor() {}
 
+            testString(theword)
+            {
+                console.log(theword);
+            }
+
             getFileStream() {
                 CppBridge.gotFile = false;
                 return CppBridge.fileStream;

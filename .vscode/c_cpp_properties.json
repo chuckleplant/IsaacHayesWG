@@ -28,6 +28,7 @@
                 "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src",                
                 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/",
                 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/4.2.1",
+                "/Users/sergio-mb/Applications/emsdk-portable/emscripten/1.37.9/system/include/emscripten",
                 "${workspaceRoot}/../../../libs/boost/include",
                 "${workspaceRoot}/../../../libs/cairo/include",
                 "${workspaceRoot}/../../../libs/cairo/include/cairo",

@@ -31,6 +31,13 @@ bool ofApp::imageLoaded()
 
     val cppBridge = val::global("CppBridge").new_();
     bool gotFile = cppBridge.call<bool>("gotFile");
+
+
+    //if(cppBridge.call<bool>("testString",std::string("staywoke")))
+    //{
+    //    ofLog() << "WOKE";
+    //}
+
     if(gotFile)
     {
         ofLogNotice() << "File received from browser";
@@ -114,7 +121,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     if(button == 2)
     {
-        shaft.toggleLock();
+        shaftGui.toggleCursor();
     }
 }
 

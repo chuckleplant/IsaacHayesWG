@@ -1,12 +1,16 @@
 #include "LightShaft.h"
 #include "ofMain.h"
 #include "ofFileUtils.h"
+#include "emscripten.h"
+#include "Base64.h"
+#include "ofEvents.h"
 using namespace glm;
 using namespace std;
 
+
 LightShaft::LightShaft() : 
     imageDimension(10,10),
-    bLocked(false)
+    saveFlag(false)
 {
 }
 
@@ -15,10 +19,14 @@ LightShaft::~LightShaft()
 {
 }
 
+void LightShaft::saveImage()
+{
+    saveFlag = true;
+}
+
 void LightShaft::setGui(ShaftGui * shaftGui)
 {
     gui = shaftGui;
-
     ofLog() << "Load shaders : "<< shader.loadShaders();
 
     ofBuffer buf = ofBufferFromFile(ofToDataPath("RDR2.png"));
@@ -30,7 +38,10 @@ void LightShaft::setGui(ShaftGui * shaftGui)
        sceneImage.update();
        allocateBuffers(sceneImage);
     }
-    
+
+    // Listen to saveImage button
+    gui->getSaveButton().addListener(this, &LightShaft::saveImage);
+    ofAddListener(ofEvents().update, this, &LightShaft::update);
 }
 
 void LightShaft::allocateBuffers(ofImage const & loadedImage)
@@ -101,14 +112,33 @@ void LightShaft::resizeLayout()
     }
 }
 
-void LightShaft::toggleLock()
+void LightShaft::update(ofEventArgs&)
 {
-    bLocked = !bLocked;
+    if(saveFlag)
+    {
+        ofPixels renderPix;
+        shaftComposite.readToPixels(renderPix);
+        auto numBytes = renderPix.getWidth() * renderPix.getHeight() * renderPix.getNumChannels();
+        auto encodedLength = Base64::EncodedLength(numBytes);
+        string encodedFrame;
+        encodedFrame.resize(encodedLength);
+        const char * input = reinterpret_cast<const char *>(renderPix.getData());
+        if(Base64::Encode(input, numBytes, &encodedFrame[0], encodedFrame.size()))
+        {
+            ofLog() << "Base64 encoded frame has "<< encodedFrame.size() << " size";
+        }
+        else
+        {
+            ofLogError() << "Failed to encode frame";
+        }
+
+        saveFlag = false;
+    }
 }
 
 void LightShaft::draw()
 {
-    if(!bLocked)
+    if(gui->isCursorMoving())
     {
         unsigned int originMouseX = ofGetMouseX() - renderLayout.x;
         unsigned int originMouseY = ofGetMouseY() - renderLayout.y;
