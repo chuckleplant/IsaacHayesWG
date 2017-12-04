@@ -19,12 +19,12 @@ void ShaftGui::setup()
     
     parameters.setName("settings");
     parameters.add(cursorMoves.set("Move sun ([Right click])", true));
-    parameters.add(decay.set("Decay", 0.96815));    
-    parameters.add(weight.set("Weight", 0.58767));
-    parameters.add(density.set("Density", 0.926));
+    parameters.add(decay.set("Decay", 0.946));    
+    parameters.add(weight.set("Weight", 0.74));
+    parameters.add(density.set("Density", 0.9));
     parameters.add(numSamples.set("Samples", 100));
-    parameters.add(sunRadius.set("Sun radius", 50.0));
-    parameters.add(sunResolution.set("Sun resolution", 20));
+    parameters.add(sunRadius.set("Sun radius", 230.0));
+    parameters.add(sunResolution.set("Sun resolution", 26));
     parameters.add(baseColor.set("Base color", ofColor(155,41,33)));
     parameters.add(accentColor.set("Accent color", ofColor(228,77,65)));
     parameters.add(sunColor.set("Sun color", ofColor::orangeRed));
