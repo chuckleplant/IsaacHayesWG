@@ -8,31 +8,17 @@ using namespace emscripten;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofSetLogLevel(OF_LOG_NOTICE);
+    ofSetLogLevel("ofShader", OF_LOG_SILENT);
     sceneImage.allocate(10, 10, OF_IMAGE_COLOR);
-#ifdef TARGET_OSX
-ofLogNotice() << "osx";
-#endif
-#ifdef TARGET_WIN32
-ofLogNotice() << "win";
-#endif
-#if defined( TARGET_LINUX ) && defined (OF_USING_GTK)
-ofLogNotice() << "lin";
-#endif
-
-    shaftGui.setup(std::bind(&ofApp::setupImageResourcesFromImage, this, std::placeholders::_1));
-
-    ////
-    // Scene params
-    //ofBackground(0, 0, 0);
-    //ofSetVerticalSync(true);
-    //ofDisableDepthTest();
+    shaftGui.setup();
+    shaft.setWindowSize(ofGetWindowWidth(), ofGetWindowHeight());
+    shaft.setGui(&shaftGui);
+    ofDisableArbTex();
     ofEnableAlphaBlending();
 }
 
-ofVec2f ofApp::getRenderDimensions()
-{
-    return ofVec2f(sceneImage.getWidth(), sceneImage.getHeight());
-}
+
 
 bool ofApp::imageLoaded()
 {
@@ -45,11 +31,17 @@ bool ofApp::imageLoaded()
 
     val cppBridge = val::global("CppBridge").new_();
     bool gotFile = cppBridge.call<bool>("gotFile");
+
+
+    //if(cppBridge.call<bool>("testString",std::string("staywoke")))
+    //{
+    //    ofLog() << "WOKE";
+    //}
+
     if(gotFile)
     {
-        ofLogNotice() << "File received from JavaScript";
+        ofLogNotice() << "File received from browser";
         string fileStream = cppBridge.call<string>("getFileStream");
-        ofLog() << "File base64 length : " <<fileStream.size();
         
         int decLen = Base64::DecodedLength(fileStream.c_str(), fileStream.size());
         char * outBuf = new char[decLen];
@@ -57,10 +49,8 @@ bool ofApp::imageLoaded()
         bool loadSuccess = false;
         if(decodeSucces)
         {
-            ofBuffer imageBuffer(outBuf, decLen); 
-            ofLog() << "ofBuffer size : " << imageBuffer.size();
-            loadSuccess = ofLoadImage(sceneImage.getPixels(), imageBuffer);   
-            ofLog() << "Pixels w,h : "<< sceneImage.getWidth() << ", " << sceneImage.getHeight();
+            ofBuffer imageBuffer(outBuf, decLen);
+            loadSuccess = ofLoadImage(sceneImage.getPixels(), imageBuffer);
             sceneImage.update();
 
         }
@@ -79,19 +69,18 @@ bool ofApp::imageLoaded()
 void ofApp::update(){
     if(imageLoaded())
     {
-
+        shaft.allocateBuffers(sceneImage);   
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofBackground(ofColor::black);
     //Draw background
-    ofPushMatrix();
-    ofVec2f size = getRenderDimensions();
-    ofBackgroundGradient(shaftGui.getAccentColor(), shaftGui.getBaseColor());
-    ofPopMatrix();
+    //ofVec2f sunPos(mouseX, mouseY);
+    //shaft.render(sunPos, sceneImage);
+    shaft.draw();
     shaftGui.draw();
-    sceneImage.draw(mouseX, mouseY);
 }
 
 void ofApp::setupImageResourcesFromImage(string const & imageFilename)
@@ -130,7 +119,10 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    if(button == 2)
+    {
+        shaftGui.toggleCursor();
+    }
 }
 
 //--------------------------------------------------------------
@@ -150,7 +142,6 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
 }
 
 //--------------------------------------------------------------

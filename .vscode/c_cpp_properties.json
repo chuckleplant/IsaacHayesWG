@@ -4,26 +4,47 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceRoot}",
+                "${workspaceRoot}/src",
                 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1",
                 "/usr/local/include",
                 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include",
                 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
                 "/usr/include",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/utils",
                 "/usr/local/include",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/events",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/app",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/3d",
                 "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/math",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/sound",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/communication",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/gl",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/graphics",
-                "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/video",
+                "${workspaceRoot}/../../../libs/openFrameworks/utils",
+                "${workspaceRoot}/../../../libs/openFrameworks/events",
+                "${workspaceRoot}/../../../libs/openFrameworks/app",
+                "${workspaceRoot}/../../../libs/openFrameworks/3d",
+                "${workspaceRoot}/../../../libs/openFrameworks",
+                "${workspaceRoot}/../../../libs/openFrameworks/math",
+                "${workspaceRoot}/../../../libs/openFrameworks/sound",
+                "${workspaceRoot}/../../../libs/openFrameworks/communication",
+                "${workspaceRoot}/../../../libs/openFrameworks/gl",
+                "${workspaceRoot}/../../../libs/openFrameworks/graphics",
+                "${workspaceRoot}/../../../libs/openFrameworks/video",
                 "/usr/include",
                 "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/types",
-                "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src"
+                "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src",                
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/",
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/4.2.1",
+                "/Users/sergio-mb/Applications/emsdk-portable/emscripten/1.37.9/system/include/emscripten",
+                "${workspaceRoot}/../../../libs/boost/include",
+                "${workspaceRoot}/../../../libs/cairo/include",
+                "${workspaceRoot}/../../../libs/cairo/include/cairo",
+                "${workspaceRoot}/../../../libs/curl/include",
+                "${workspaceRoot}/../../../libs/fmodex/include",
+                "${workspaceRoot}/../../../libs/freetype/include",
+                "${workspaceRoot}/../../../libs/glew/include",
+                "${workspaceRoot}/../../../libs/glfw/include",
+                "${workspaceRoot}/../../../libs/glm/include",
+                "${workspaceRoot}/../../../libs/json/include",
+                "${workspaceRoot}/../../../libs/pugixml/include",
+                "${workspaceRoot}/../../../libs/uriparser/include",
+                "${workspaceRoot}/../../../libs/utf8/include",
+                "${workspaceRoot}/../../../libs",
+                "${workspaceRoot}/../../../libs/glew/include",
+                "${workspaceRoot}/../../../addons"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -47,13 +68,18 @@
                     "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/graphics",
                     "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/video",
                     "/usr/include",
+                    "/opt/X11/include",
                     "/Users/sergio-mb/Development/ChuckFrameworks/libs/openFrameworks/types",
                     "/Users/sergio-mb/Development/ChuckFrameworks/addons/ofxGui/src",
                     "${workspaceRoot}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ]
         },
         {
             "name": "Linux",
@@ -95,5 +121,5 @@
             }
         }
     ],
-    "version": 2
+    "version": 3
 }
