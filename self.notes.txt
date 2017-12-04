@@ -1,7 +1,0 @@
-Self reminder
-
-ofemup
-emmake clean (optional)
-emmake make
-also remember to run scripts/emscripten/donwload_libs
-
