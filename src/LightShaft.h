@@ -35,6 +35,7 @@ private:
     bool saveFlag;
 
     void resizeLayout();
-    bool encodeFrameBase64(std::string & output);
+    void saveFBOAsPNG(const ofFbo & fbo);
+    bool encodeFrameBase64(const ofFbo & fbo, std::string & output);
     void submitFrameToBrowser(std::string const & frame64);
 };

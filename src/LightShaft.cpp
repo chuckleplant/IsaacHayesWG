@@ -115,32 +115,20 @@ void LightShaft::resizeLayout()
 }
 
 
-bool LightShaft::encodeFrameBase64(std::string & output)
+bool LightShaft::encodeFrameBase64(const ofFbo & fbo, std::string & output)
 {
     ofPixels renderPix;
-    shaftComposite.readToPixels(renderPix);
+    fbo.readToPixels(renderPix);
     ofBuffer pngBuffer;
     ofSaveImage(renderPix, pngBuffer);
     if(pngBuffer.size() > 0)
     {
         auto numBytes = pngBuffer.size();
         auto encodedLength = Base64::EncodedLength(numBytes);
-
         output.resize(encodedLength);
         const char * input = reinterpret_cast<const char *>(pngBuffer.getData());
         return Base64::Encode(input, numBytes, &output[0], output.size());
     }
-
-
-    //auto numBytes = w * h * renderPix.getNumChannels();
-    //auto encodedLength = Base64::EncodedLength(numBytes);
-    //string encodedFrame;
-    //encodedFrame.resize(encodedLength);
-    //const char * input = reinterpret_cast<const char *>(renderPix.getData());
-    //if(Base64::Encode(input, numBytes, &encodedFrame[0], encodedFrame.size()))
-    //{
-//
-    //}
     return false;
 }
 
@@ -162,21 +150,24 @@ void LightShaft::submitFrameToBrowser(std::string const & frame64)
     }
 }
 
-
+void LightShaft::saveFBOAsPNG(const ofFbo & fbo)
+{
+    string encodedFrame;
+    if(encodeFrameBase64(fbo, encodedFrame))
+    {
+        submitFrameToBrowser(encodedFrame);
+    } 
+    else
+    {
+        ofLogError() << "Failed to encode frame";
+    }
+}
 
 void LightShaft::update(ofEventArgs&)
 {
     if(saveFlag)
     {
-        string encodedFrame;
-        if(encodeFrameBase64(encodedFrame))
-        {
-            submitFrameToBrowser(encodedFrame);
-        } 
-        else
-        {
-            ofLogError() << "Failed to encode frame";
-        }
+        saveFBOAsPNG(shaftComposite);
         saveFlag = false;
     }
 }
